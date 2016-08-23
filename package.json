@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack ./index.js bundle.js",
     "build": "webpack ./index.js bundle.js",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server ./index.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/lwc24/webpage#readme",
   "dependencies": {
-    "css-loader": "^0.23.1",
     "elm-webpack-loader": "^3.0.6",
     "webpack": "^1.13.2"
   }
