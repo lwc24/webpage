@@ -7,7 +7,11 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.css$/, loader: "style!css!" },
-            { test: /\.elm$/, loader: "elm" }
+            {
+                test: /\.elm$/,
+                exclude: [/elm-stuff/, /node-modules/],
+                loader: "elm"
+            }
         ]
     }
 }
