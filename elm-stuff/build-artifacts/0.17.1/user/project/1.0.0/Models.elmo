@@ -1,36 +1,31 @@
-var _user$project$Models$initModel = {
-	players: _elm_lang$core$Native_List.fromArray(
-		[]),
-	name: '',
-	playerId: _elm_lang$core$Maybe$Nothing,
-	plays: _elm_lang$core$Native_List.fromArray(
-		[])
+var _user$project$Models$initialPill = {
+	pos: {ctor: '_Tuple2', _0: 0, _1: 0},
+	vel: {ctor: '_Tuple2', _0: 0, _1: 0},
+	radius: 15
 };
-var _user$project$Models$init = {ctor: '_Tuple2', _0: _user$project$Models$initModel, _1: _elm_lang$core$Platform_Cmd$none};
-var _user$project$Models$Player = F3(
+var _user$project$Models$initialModel = {
+	pills: _elm_lang$core$Native_List.fromArray(
+		[_user$project$Models$initialPill, _user$project$Models$initialPill]),
+	time: 0.0
+};
+var _user$project$Models$init = {ctor: '_Tuple2', _0: _user$project$Models$initialModel, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$Models$vecAdd = F2(
+	function (_p1, _p0) {
+		var _p2 = _p1;
+		var _p3 = _p0;
+		return {ctor: '_Tuple2', _0: _p2._0 + _p3._0, _1: _p2._1 + _p3._1};
+	});
+var _user$project$Models$Pill = F3(
 	function (a, b, c) {
-		return {id: a, name: b, points: c};
+		return {pos: a, vel: b, radius: c};
 	});
-var _user$project$Models$Play = F4(
-	function (a, b, c, d) {
-		return {id: a, playerId: b, name: c, points: d};
-	});
-var _user$project$Models$Model = F4(
-	function (a, b, c, d) {
-		return {players: a, name: b, playerId: c, plays: d};
-	});
-var _user$project$Models$DeletePlay = function (a) {
-	return {ctor: 'DeletePlay', _0: a};
-};
-var _user$project$Models$Cancel = {ctor: 'Cancel'};
-var _user$project$Models$Save = {ctor: 'Save'};
-var _user$project$Models$Input = function (a) {
-	return {ctor: 'Input', _0: a};
-};
-var _user$project$Models$Score = F2(
+var _user$project$Models$Model = F2(
 	function (a, b) {
-		return {ctor: 'Score', _0: a, _1: b};
+		return {pills: a, time: b};
 	});
-var _user$project$Models$Edit = function (a) {
-	return {ctor: 'Edit', _0: a};
+var _user$project$Models$Tick = function (a) {
+	return {ctor: 'Tick', _0: a};
+};
+var _user$project$Models$PositMsg = function (a) {
+	return {ctor: 'PositMsg', _0: a};
 };

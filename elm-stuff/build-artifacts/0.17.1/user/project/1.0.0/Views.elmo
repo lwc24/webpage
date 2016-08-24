@@ -1,216 +1,76 @@
-var _user$project$Views$playerForm = function (model) {
+var _user$project$Views$view = function (model) {
+	var pill2_ = A2(
+		_elm_lang$core$Maybe$withDefault,
+		_elm_lang$core$Native_List.fromArray(
+			[_user$project$State$initialPill]),
+		_elm_lang$core$List$tail(model.pills));
+	var pill2 = A2(
+		_elm_lang$core$Maybe$withDefault,
+		_user$project$State$initialPill,
+		_elm_lang$core$List$head(pill2_));
+	var _p0 = pill2.pos;
+	var pill2x = _p0._0;
+	var pill2y = _p0._1;
+	var pill1 = A2(
+		_elm_lang$core$Maybe$withDefault,
+		_user$project$State$initialPill,
+		_elm_lang$core$List$head(model.pills));
+	var _p1 = pill1.pos;
+	var pill1x = _p1._0;
+	var pill1y = _p1._1;
 	return A2(
-		_elm_lang$html$Html$form,
+		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Events$onSubmit(_user$project$Models$Save)
+				_elm_lang$svg$Svg_Attributes$class('main')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
-				_elm_lang$html$Html$input,
+				_elm_lang$svg$Svg$svg,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$type$('text'),
-						_elm_lang$html$Html_Attributes$placeholder('Add/Edit Player...'),
-						_elm_lang$html$Html_Events$onInput(_user$project$Models$Input),
-						_elm_lang$html$Html_Attributes$value(model.name)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$button,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('submit')
+						_elm_lang$svg$Svg_Attributes$viewBox('0 0 500 500'),
+						_elm_lang$svg$Svg_Attributes$width('500px')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('Save')
+						A2(
+						_elm_lang$svg$Svg$circle,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$svg$Svg_Attributes$cx(
+								_elm_lang$core$Basics$toString(pill1x)),
+								_elm_lang$svg$Svg_Attributes$cy(
+								_elm_lang$core$Basics$toString(pill1y)),
+								_elm_lang$svg$Svg_Attributes$r(
+								_elm_lang$core$Basics$toString(pill1.radius)),
+								_elm_lang$svg$Svg_Attributes$fill('blue')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[])),
+						A2(
+						_elm_lang$svg$Svg$circle,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$svg$Svg_Attributes$cx(
+								_elm_lang$core$Basics$toString(pill2x)),
+								_elm_lang$svg$Svg_Attributes$cy(
+								_elm_lang$core$Basics$toString(pill2y)),
+								_elm_lang$svg$Svg_Attributes$r(
+								_elm_lang$core$Basics$toString(pill2.radius)),
+								_elm_lang$svg$Svg_Attributes$fill('red')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[]))
 					])),
-				A2(
-				_elm_lang$html$Html$button,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('button'),
-						_elm_lang$html$Html_Events$onClick(_user$project$Models$Cancel)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Cancel')
-					]))
-			]));
-};
-var _user$project$Views$pointTotal = function (model) {
-	var total = _elm_lang$core$List$sum(
-		A2(
-			_elm_lang$core$List$map,
-			function (_) {
-				return _.points;
-			},
-			model.plays));
-	return A2(
-		_elm_lang$html$Html$footer,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Total: ')
-					])),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(
-						_elm_lang$core$Basics$toString(total))
-					]))
-			]));
-};
-var _user$project$Views$player = function (player) {
-	return A2(
-		_elm_lang$html$Html$li,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$button,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('button'),
-						_elm_lang$html$Html_Events$onClick(
-						_user$project$Models$Edit(player))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Edit')
-					])),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(player.name)
-					])),
-				A2(
-				_elm_lang$html$Html$button,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('button'),
-						_elm_lang$html$Html_Events$onClick(
-						A2(_user$project$Models$Score, player, 2))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('2 pts')
-					])),
-				A2(
-				_elm_lang$html$Html$button,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('button'),
-						_elm_lang$html$Html_Events$onClick(
-						A2(_user$project$Models$Score, player, 3))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('3 pts')
-					])),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(
-						_elm_lang$core$Basics$toString(player.points))
-					]))
-			]));
-};
-var _user$project$Views$playerList = function (model) {
-	return A2(
-		_elm_lang$html$Html$ul,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		A2(
-			_elm_lang$core$List$map,
-			_user$project$Views$player,
-			A2(
-				_elm_lang$core$List$sortBy,
-				function (_) {
-					return _.name;
-				},
-				model.players)));
-};
-var _user$project$Views$playerListHeader = A2(
-	_elm_lang$html$Html$header,
-	_elm_lang$core$Native_List.fromArray(
-		[]),
-	_elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html$text('Name')
-				])),
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html$text('Points')
-				]))
-		]));
-var _user$project$Views$playerSection = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_user$project$Views$playerListHeader,
-				_user$project$Views$playerList(model),
-				_user$project$Views$pointTotal(model)
-			]));
-};
-var _user$project$Views$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$h1,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Score Keeper!')
-					])),
-				_user$project$Views$playerSection(model),
-				_user$project$Views$playerForm(model),
 				A2(
 				_elm_lang$html$Html$p,
 				_elm_lang$core$Native_List.fromArray(
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text(
-						_elm_lang$core$Basics$toString(model))
+						_elm_lang$svg$Svg$text('Praise be to Keith')
 					]))
 			]));
 };

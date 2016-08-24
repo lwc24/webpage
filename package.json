@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lwc24/webpage.git"
+    "url": "git+https://github.com/lwcook/webpage.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lwc24/webpage/issues"
+    "url": "https://github.com/lwcook/webpage/issues"
   },
-  "homepage": "https://github.com/lwc24/webpage#readme",
+  "homepage": "https://github.com/lwcook/webpage#readme",
   "dependencies": {
     "elm-webpack-loader": "^3.0.6",
     "webpack": "^1.13.2"
