@@ -82,7 +82,7 @@ var _user$project$State$update = F2(
 							pill,
 							A2(
 								_user$project$State$relPos,
-								{ctor: '_Tuple2', _0: 405, _1: 10},
+								{ctor: '_Tuple2', _0: 110, _1: 10},
 								{ctor: '_Tuple2', _0: _p11.x, _1: _p11.y})) : pill;
 					},
 					model.pills);

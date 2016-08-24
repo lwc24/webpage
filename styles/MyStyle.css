@@ -6,11 +6,11 @@ p {
 }
 body{
     background-color : #DDDDDD;
-    text-align: center;
 }
 .main{
     background-color : white;
-    width : 500px;
-    margin-left : auto;
+    width : 400px;
+    margin-left : 100px;
     margin-right : auto;
+    padding : 0px;
 }

@@ -67,7 +67,7 @@ update msg model =
                     (\ pill ->
                         if pill.id == 0
                             then mousePill pill
-                                <|relPos (405, 10) ( position.x, position.y )
+                                <|relPos (110, 10) ( position.x, position.y )
                         else
                             pill
                     )

@@ -8766,7 +8766,7 @@
 								pill,
 								A2(
 									_user$project$State$relPos,
-									{ctor: '_Tuple2', _0: 405, _1: 10},
+									{ctor: '_Tuple2', _0: 110, _1: 10},
 									{ctor: '_Tuple2', _0: _p11.x, _1: _p11.y})) : pill;
 						},
 						model.pills);
@@ -8840,8 +8840,8 @@
 					_elm_lang$svg$Svg$svg,
 					_elm_lang$core$Native_List.fromArray(
 						[
-							_elm_lang$svg$Svg_Attributes$viewBox('0 0 500 500'),
-							_elm_lang$svg$Svg_Attributes$width('500px')
+							_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
+							_elm_lang$svg$Svg_Attributes$width('400px')
 						]),
 					_elm_lang$core$Native_List.fromArray(
 						[
@@ -8985,7 +8985,7 @@
 
 
 	// module
-	exports.push([module.id, "div {\n    color: blue;\n}\np {\n    color: red;\n}\nbody{\n    background-color : #DDDDDD;\n    text-align: center;\n}\n.main{\n    background-color : white;\n    width : 500px;\n    margin-left : auto;\n    margin-right : auto;\n}\n", ""]);
+	exports.push([module.id, "div {\n    color: blue;\n}\np {\n    color: red;\n}\nbody{\n    background-color : #DDDDDD;\n}\n.main{\n    background-color : white;\n    width : 400px;\n    margin-left : 100px;\n    margin-right : auto;\n    padding : 0px;\n}\n", ""]);
 
 	// exports
 

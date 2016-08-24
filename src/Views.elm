@@ -28,7 +28,7 @@ view model =
         ( pill2x, pill2y ) =
             pill2.pos
     in
-        div [ class "main" ] [ svg [ viewBox "0 0 500 500", width "500px" ]
+        div [ class "main" ] [ svg [ viewBox "0 0 400 400", width "400px" ]
                 [ circle
                     [ cx <| toString pill1x
                     , cy <| toString pill1y

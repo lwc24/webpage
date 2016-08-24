@@ -30,8 +30,8 @@ var _user$project$Views$view = function (model) {
 				_elm_lang$svg$Svg$svg,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$svg$Svg_Attributes$viewBox('0 0 500 500'),
-						_elm_lang$svg$Svg_Attributes$width('500px')
+						_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
+						_elm_lang$svg$Svg_Attributes$width('400px')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
