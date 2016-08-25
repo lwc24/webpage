@@ -3,7 +3,7 @@ var _user$project$State$subscriptions = function (model) {
 		_elm_lang$core$Native_List.fromArray(
 			[
 				_elm_lang$mouse$Mouse$moves(_user$project$Types$PositMsg),
-				A2(_elm_lang$core$Time$every, 30 * _elm_lang$core$Time$millisecond, _user$project$Types$Tick)
+				A2(_elm_lang$core$Time$every, 10 * _elm_lang$core$Time$millisecond, _user$project$Types$Tick)
 			]));
 };
 var _user$project$State$relPos = F2(
@@ -64,9 +64,9 @@ var _user$project$State$stepPill = F2(
 			_user$project$State$vecAdd,
 			pill.pos,
 			A2(_user$project$State$vecMult, tstep, pill.vel));
-		return _elm_lang$core$Native_Utils.update(
+		return (!_elm_lang$core$Native_Utils.eq(newPos, pill.pos)) ? _elm_lang$core$Native_Utils.update(
 			pill,
-			{pos: newPos, time: mdl.elapsedTime});
+			{pos: newPos, time: mdl.elapsedTime}) : pill;
 	});
 var _user$project$State$update = F2(
 	function (msg, model) {

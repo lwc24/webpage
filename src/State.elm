@@ -48,7 +48,10 @@ stepPill mdl pill =
         tstep = ( mdl.elapsedTime - pill.time )
         newPos = vecAdd pill.pos <| vecMult tstep pill.vel
     in
-        { pill | pos = newPos, time = mdl.elapsedTime }
+        if newPos /= pill.pos -- to deal with rounding
+            then { pill | pos = newPos, time = mdl.elapsedTime }
+        else
+            pill
 
 mousePill : Pill -> Vec -> Pill
 mousePill pill pos =
@@ -77,12 +80,12 @@ update msg model =
 
         Tick time ->
             ( { model | pills = List.map
-                                    (\ pill ->
-                                        if pill.id /= 0 then (stepPill model) pill
-                                        else pill
-                                    )
-                                    model.pills
-                      , elapsedTime = (Time.inSeconds time) - (model.startTime) }
+                                (\ pill ->
+                                    if pill.id /= 0 then (stepPill model) pill
+                                    else pill
+                                )
+                                model.pills
+                  , elapsedTime = (Time.inSeconds time) - (model.startTime) }
             , Cmd.none )
 
         StartTick time ->
@@ -93,4 +96,4 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.batch [ Mouse.moves PositMsg, every (30*millisecond) Tick ]
+    Sub.batch [ Mouse.moves PositMsg, every (10*millisecond) Tick ]
