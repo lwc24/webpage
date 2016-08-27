@@ -1,6 +1,6 @@
-var _user$project$Types$Pill = F5(
-	function (a, b, c, d, e) {
-		return {id: a, pos: b, vel: c, radius: d, time: e};
+var _user$project$Types$Pill = F6(
+	function (a, b, c, d, e, f) {
+		return {id: a, pos: b, vel: c, radius: d, color: e, time: f};
 	});
 var _user$project$Types$Model = F3(
 	function (a, b, c) {

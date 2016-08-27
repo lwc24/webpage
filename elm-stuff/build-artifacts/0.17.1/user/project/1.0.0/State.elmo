@@ -18,12 +18,31 @@ var _user$project$State$mousePill = F2(
 			pill,
 			{pos: pos});
 	});
+var _user$project$State$movePlayer = F2(
+	function (position, model) {
+		var newPills = A2(
+			_elm_lang$core$List$map,
+			function (pill) {
+				return _elm_lang$core$Native_Utils.eq(pill.id, 0) ? A2(
+					_user$project$State$mousePill,
+					pill,
+					A2(
+						_user$project$State$relPos,
+						{ctor: '_Tuple2', _0: 110, _1: 10},
+						position)) : pill;
+			},
+			model.pills);
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{pills: newPills});
+	});
 var _user$project$State$getStartTime = A3(_elm_lang$core$Task$perform, _user$project$Types$NoOp, _user$project$Types$StartTick, _elm_lang$core$Time$now);
 var _user$project$State$initialPill = {
 	id: 0,
 	pos: {ctor: '_Tuple2', _0: 0, _1: 0},
 	vel: {ctor: '_Tuple2', _0: 50, _1: 50},
 	radius: 15,
+	color: 'red',
 	time: 0.0
 };
 var _user$project$State$initialModel = {
@@ -31,7 +50,7 @@ var _user$project$State$initialModel = {
 		[
 			_elm_lang$core$Native_Utils.update(
 			_user$project$State$initialPill,
-			{id: 0}),
+			{id: 0, color: 'blue'}),
 			_elm_lang$core$Native_Utils.update(
 			_user$project$State$initialPill,
 			{id: 1})
@@ -74,23 +93,12 @@ var _user$project$State$update = F2(
 		switch (_p10.ctor) {
 			case 'PositMsg':
 				var _p11 = _p10._0;
-				var newPills = A2(
-					_elm_lang$core$List$map,
-					function (pill) {
-						return _elm_lang$core$Native_Utils.eq(pill.id, 0) ? A2(
-							_user$project$State$mousePill,
-							pill,
-							A2(
-								_user$project$State$relPos,
-								{ctor: '_Tuple2', _0: 110, _1: 10},
-								{ctor: '_Tuple2', _0: _p11.x, _1: _p11.y})) : pill;
-					},
-					model.pills);
 				return {
 					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{pills: newPills}),
+					_0: A2(
+						_user$project$State$movePlayer,
+						{ctor: '_Tuple2', _0: _p11.x, _1: _p11.y},
+						model),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'Tick':

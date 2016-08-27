@@ -19,12 +19,13 @@ initialPill =
     , pos = ( 0, 0 ) -- note position is defined left,down
     , vel = ( 50, 50 )
     , radius = 15
+    , color = "red"
     , time = 0.0
     }
 
 initialModel : Model
 initialModel =
-    { pills =   [ { initialPill | id = 0 }
+    { pills =   [ { initialPill | id = 0, color = "blue"}
                 , { initialPill | id = 1 }
                 ]
     , elapsedTime = 0.0, startTime = 0.0
@@ -61,23 +62,26 @@ relPos : Vec -> Vec -> Vec
 relPos (ox, oy) (x, y) =
     (x - ox, y - oy)
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        PositMsg position ->
+movePlayer : Vec -> Model -> Model
+movePlayer position model =
             let
                 newPills = List.map
                     (\ pill ->
                         if pill.id == 0
                             then mousePill pill
-                                <|relPos (110, 10) ( position.x, position.y )
+                                <|relPos (110, 10) position
                         else
                             pill
                     )
                     model.pills
             in
-                ( { model | pills = newPills } , Cmd.none )
+                { model | pills = newPills }
 
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        PositMsg position ->
+            ( movePlayer ( position.x,  position.y ) model, Cmd.none )
         Tick time ->
             ( { model | pills = List.map
                                 (\ pill ->

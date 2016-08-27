@@ -8661,9 +8661,9 @@
 	var _elm_lang$svg$Svg_Attributes$accelerate = _elm_lang$virtual_dom$VirtualDom$attribute('accelerate');
 	var _elm_lang$svg$Svg_Attributes$accentHeight = _elm_lang$virtual_dom$VirtualDom$attribute('accent-height');
 
-	var _user$project$Types$Pill = F5(
-		function (a, b, c, d, e) {
-			return {id: a, pos: b, vel: c, radius: d, time: e};
+	var _user$project$Types$Pill = F6(
+		function (a, b, c, d, e, f) {
+			return {id: a, pos: b, vel: c, radius: d, color: e, time: f};
 		});
 	var _user$project$Types$Model = F3(
 		function (a, b, c) {
@@ -8682,12 +8682,60 @@
 		return {ctor: 'PositMsg', _0: a};
 	};
 
+	var _user$project$Views$view = function (model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$svg$Svg_Attributes$class('main')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$svg$Svg$svg,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
+							_elm_lang$svg$Svg_Attributes$width('400px')
+						]),
+					A2(
+						_elm_lang$core$List$map,
+						function (pill) {
+							return A2(
+								_elm_lang$svg$Svg$circle,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$svg$Svg_Attributes$cx(
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Basics$fst(pill.pos))),
+										_elm_lang$svg$Svg_Attributes$cy(
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Basics$snd(pill.pos))),
+										_elm_lang$svg$Svg_Attributes$r(
+										_elm_lang$core$Basics$toString(pill.radius)),
+										_elm_lang$svg$Svg_Attributes$fill(pill.color)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[]));
+						},
+						model.pills)),
+					A2(
+					_elm_lang$html$Html$p,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$svg$Svg$text('Praise be to Keith')
+						]))
+				]));
+	};
+
 	var _user$project$State$subscriptions = function (model) {
 		return _elm_lang$core$Platform_Sub$batch(
 			_elm_lang$core$Native_List.fromArray(
 				[
 					_elm_lang$mouse$Mouse$moves(_user$project$Types$PositMsg),
-					A2(_elm_lang$core$Time$every, 30 * _elm_lang$core$Time$millisecond, _user$project$Types$Tick)
+					A2(_elm_lang$core$Time$every, 10 * _elm_lang$core$Time$millisecond, _user$project$Types$Tick)
 				]));
 	};
 	var _user$project$State$relPos = F2(
@@ -8702,12 +8750,31 @@
 				pill,
 				{pos: pos});
 		});
+	var _user$project$State$movePlayer = F2(
+		function (position, model) {
+			var newPills = A2(
+				_elm_lang$core$List$map,
+				function (pill) {
+					return _elm_lang$core$Native_Utils.eq(pill.id, 0) ? A2(
+						_user$project$State$mousePill,
+						pill,
+						A2(
+							_user$project$State$relPos,
+							{ctor: '_Tuple2', _0: 110, _1: 10},
+							position)) : pill;
+				},
+				model.pills);
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{pills: newPills});
+		});
 	var _user$project$State$getStartTime = A3(_elm_lang$core$Task$perform, _user$project$Types$NoOp, _user$project$Types$StartTick, _elm_lang$core$Time$now);
 	var _user$project$State$initialPill = {
 		id: 0,
 		pos: {ctor: '_Tuple2', _0: 0, _1: 0},
 		vel: {ctor: '_Tuple2', _0: 50, _1: 50},
 		radius: 15,
+		color: 'red',
 		time: 0.0
 	};
 	var _user$project$State$initialModel = {
@@ -8715,7 +8782,7 @@
 			[
 				_elm_lang$core$Native_Utils.update(
 				_user$project$State$initialPill,
-				{id: 0}),
+				{id: 0, color: 'blue'}),
 				_elm_lang$core$Native_Utils.update(
 				_user$project$State$initialPill,
 				{id: 1})
@@ -8748,9 +8815,9 @@
 				_user$project$State$vecAdd,
 				pill.pos,
 				A2(_user$project$State$vecMult, tstep, pill.vel));
-			return _elm_lang$core$Native_Utils.update(
+			return (!_elm_lang$core$Native_Utils.eq(newPos, pill.pos)) ? _elm_lang$core$Native_Utils.update(
 				pill,
-				{pos: newPos, time: mdl.elapsedTime});
+				{pos: newPos, time: mdl.elapsedTime}) : pill;
 		});
 	var _user$project$State$update = F2(
 		function (msg, model) {
@@ -8758,23 +8825,12 @@
 			switch (_p10.ctor) {
 				case 'PositMsg':
 					var _p11 = _p10._0;
-					var newPills = A2(
-						_elm_lang$core$List$map,
-						function (pill) {
-							return _elm_lang$core$Native_Utils.eq(pill.id, 0) ? A2(
-								_user$project$State$mousePill,
-								pill,
-								A2(
-									_user$project$State$relPos,
-									{ctor: '_Tuple2', _0: 110, _1: 10},
-									{ctor: '_Tuple2', _0: _p11.x, _1: _p11.y})) : pill;
-						},
-						model.pills);
 					return {
 						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{pills: newPills}),
+						_0: A2(
+							_user$project$State$movePlayer,
+							{ctor: '_Tuple2', _0: _p11.x, _1: _p11.y},
+							model),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				case 'Tick':
@@ -8807,83 +8863,6 @@
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}
 		});
-
-	var _user$project$Views$view = function (model) {
-		var pill2_ = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_elm_lang$core$Native_List.fromArray(
-				[_user$project$State$initialPill]),
-			_elm_lang$core$List$tail(model.pills));
-		var pill2 = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$State$initialPill,
-			_elm_lang$core$List$head(pill2_));
-		var _p0 = pill2.pos;
-		var pill2x = _p0._0;
-		var pill2y = _p0._1;
-		var pill1 = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$State$initialPill,
-			_elm_lang$core$List$head(model.pills));
-		var _p1 = pill1.pos;
-		var pill1x = _p1._0;
-		var pill1y = _p1._1;
-		return A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$svg$Svg_Attributes$class('main')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$svg$Svg$svg,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
-							_elm_lang$svg$Svg_Attributes$width('400px')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_elm_lang$svg$Svg$circle,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$svg$Svg_Attributes$cx(
-									_elm_lang$core$Basics$toString(pill1x)),
-									_elm_lang$svg$Svg_Attributes$cy(
-									_elm_lang$core$Basics$toString(pill1y)),
-									_elm_lang$svg$Svg_Attributes$r(
-									_elm_lang$core$Basics$toString(pill1.radius)),
-									_elm_lang$svg$Svg_Attributes$fill('blue')
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[])),
-							A2(
-							_elm_lang$svg$Svg$circle,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$svg$Svg_Attributes$cx(
-									_elm_lang$core$Basics$toString(pill2x)),
-									_elm_lang$svg$Svg_Attributes$cy(
-									_elm_lang$core$Basics$toString(pill2y)),
-									_elm_lang$svg$Svg_Attributes$r(
-									_elm_lang$core$Basics$toString(pill2.radius)),
-									_elm_lang$svg$Svg_Attributes$fill('red')
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[]))
-						])),
-					A2(
-					_elm_lang$html$Html$p,
-					_elm_lang$core$Native_List.fromArray(
-						[]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$svg$Svg$text('Praise be to Keith')
-						]))
-				]));
-	};
 
 	var _user$project$Main$main = {
 		main: _elm_lang$html$Html_App$program(

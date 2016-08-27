@@ -8,7 +8,7 @@ type alias Vec =
     ( Int, Int )
 
 type alias Pill =
-    { id : Int, pos : Vec, vel : Vec, radius : Int, time : Time }
+    { id : Int, pos : Vec, vel : Vec, radius : Int, color: String, time : Time }
 
 type Msg
     = PositMsg Mouse.Position

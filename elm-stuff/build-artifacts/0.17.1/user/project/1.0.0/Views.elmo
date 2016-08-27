@@ -1,23 +1,4 @@
 var _user$project$Views$view = function (model) {
-	var pill2_ = A2(
-		_elm_lang$core$Maybe$withDefault,
-		_elm_lang$core$Native_List.fromArray(
-			[_user$project$State$initialPill]),
-		_elm_lang$core$List$tail(model.pills));
-	var pill2 = A2(
-		_elm_lang$core$Maybe$withDefault,
-		_user$project$State$initialPill,
-		_elm_lang$core$List$head(pill2_));
-	var _p0 = pill2.pos;
-	var pill2x = _p0._0;
-	var pill2y = _p0._1;
-	var pill1 = A2(
-		_elm_lang$core$Maybe$withDefault,
-		_user$project$State$initialPill,
-		_elm_lang$core$List$head(model.pills));
-	var _p1 = pill1.pos;
-	var pill1x = _p1._0;
-	var pill1y = _p1._1;
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -33,37 +14,27 @@ var _user$project$Views$view = function (model) {
 						_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
 						_elm_lang$svg$Svg_Attributes$width('400px')
 					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$svg$Svg$circle,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$svg$Svg_Attributes$cx(
-								_elm_lang$core$Basics$toString(pill1x)),
-								_elm_lang$svg$Svg_Attributes$cy(
-								_elm_lang$core$Basics$toString(pill1y)),
-								_elm_lang$svg$Svg_Attributes$r(
-								_elm_lang$core$Basics$toString(pill1.radius)),
-								_elm_lang$svg$Svg_Attributes$fill('blue')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[])),
-						A2(
-						_elm_lang$svg$Svg$circle,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$svg$Svg_Attributes$cx(
-								_elm_lang$core$Basics$toString(pill2x)),
-								_elm_lang$svg$Svg_Attributes$cy(
-								_elm_lang$core$Basics$toString(pill2y)),
-								_elm_lang$svg$Svg_Attributes$r(
-								_elm_lang$core$Basics$toString(pill2.radius)),
-								_elm_lang$svg$Svg_Attributes$fill('red')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[]))
-					])),
+				A2(
+					_elm_lang$core$List$map,
+					function (pill) {
+						return A2(
+							_elm_lang$svg$Svg$circle,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$svg$Svg_Attributes$cx(
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Basics$fst(pill.pos))),
+									_elm_lang$svg$Svg_Attributes$cy(
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Basics$snd(pill.pos))),
+									_elm_lang$svg$Svg_Attributes$r(
+									_elm_lang$core$Basics$toString(pill.radius)),
+									_elm_lang$svg$Svg_Attributes$fill(pill.color)
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[]));
+					},
+					model.pills)),
 				A2(
 				_elm_lang$html$Html$p,
 				_elm_lang$core$Native_List.fromArray(
