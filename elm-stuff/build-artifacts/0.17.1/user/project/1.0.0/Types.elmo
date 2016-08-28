@@ -2,12 +2,21 @@ var _user$project$Types$Pill = F6(
 	function (a, b, c, d, e, f) {
 		return {id: a, pos: b, vel: c, radius: d, color: e, time: f};
 	});
-var _user$project$Types$Model = F3(
-	function (a, b, c) {
-		return {pills: a, elapsedTime: b, startTime: c};
+var _user$project$Types$Model = F5(
+	function (a, b, c, d, e) {
+		return {pills: a, elapsedTime: b, startTime: c, counter: d, ran: e};
 	});
+var _user$project$Types$Collision = function (a) {
+	return {ctor: 'Collision', _0: a};
+};
 var _user$project$Types$NoOp = function (a) {
 	return {ctor: 'NoOp', _0: a};
+};
+var _user$project$Types$AddPill = function (a) {
+	return {ctor: 'AddPill', _0: a};
+};
+var _user$project$Types$Counter = function (a) {
+	return {ctor: 'Counter', _0: a};
 };
 var _user$project$Types$StartTick = function (a) {
 	return {ctor: 'StartTick', _0: a};

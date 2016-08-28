@@ -24,5 +24,5 @@ view model =
                         []
                 )
                 model.pills
-            ,   p [] [ text "Praise be to Keith"]
+            ,   p [] [ text <| toString model ]
         ]

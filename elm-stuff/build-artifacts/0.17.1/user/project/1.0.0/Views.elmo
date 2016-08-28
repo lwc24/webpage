@@ -41,7 +41,8 @@ var _user$project$Views$view = function (model) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$svg$Svg$text('Praise be to Keith')
+						_elm_lang$svg$Svg$text(
+						_elm_lang$core$Basics$toString(model))
 					]))
 			]));
 };
