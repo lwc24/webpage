@@ -12,12 +12,14 @@ type alias Vec =
     ( Int, Int )
 
 type alias Pill =
-    { id : Int,
-    pos : Vec,
-    vel : Vec,
-    radius : Int,
-    color: String,
-    time : Time
+    { id : Int
+    , pos : Vec
+    , vel : Vec
+    , radius : Int
+    , color: String
+    , modTime : Time -- last time pill was modified
+    , birthTime : Time
+    , aliveTime : Time
     }
 
 type Msg
@@ -28,14 +30,21 @@ type Msg
     | AddPill StartPos
     | NoOp String
     | Collision Id
+    | StartGame String
+    | EndGame String
+    | StartClick Mouse.Position
     -- Note that Tick is of type (Time -> Msg)
     -- PositMsg is of type (Mouse.Position -> Msg)
 
 
 type alias Model =
-    { pills : List Pill,
-    elapsedTime : Float,
-    startTime : Time,
-    counter : Int,
-    ran : Int
+    { bStarted : Bool
+    , elapsedTime : Float
+    , startTime : Time
+    , counter : Int
+    , level : Int
+    , pills : List Pill
+    , score : Int
+    , xlims : Vec
+    , ylims : Vec
     }

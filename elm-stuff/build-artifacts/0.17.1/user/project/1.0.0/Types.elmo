@@ -1,11 +1,20 @@
-var _user$project$Types$Pill = F6(
-	function (a, b, c, d, e, f) {
-		return {id: a, pos: b, vel: c, radius: d, color: e, time: f};
+var _user$project$Types$Pill = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {id: a, pos: b, vel: c, radius: d, color: e, modTime: f, birthTime: g, aliveTime: h};
 	});
-var _user$project$Types$Model = F5(
-	function (a, b, c, d, e) {
-		return {pills: a, elapsedTime: b, startTime: c, counter: d, ran: e};
+var _user$project$Types$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {bStarted: a, elapsedTime: b, startTime: c, counter: d, level: e, pills: f, score: g, xlims: h, ylims: i};
 	});
+var _user$project$Types$StartClick = function (a) {
+	return {ctor: 'StartClick', _0: a};
+};
+var _user$project$Types$EndGame = function (a) {
+	return {ctor: 'EndGame', _0: a};
+};
+var _user$project$Types$StartGame = function (a) {
+	return {ctor: 'StartGame', _0: a};
+};
 var _user$project$Types$Collision = function (a) {
 	return {ctor: 'Collision', _0: a};
 };

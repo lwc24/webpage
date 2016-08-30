@@ -1,5 +1,5 @@
 var _user$project$Views$view = function (model) {
-	return A2(
+	return _elm_lang$core$Native_Utils.eq(model.bStarted, true) ? A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -11,8 +11,37 @@ var _user$project$Views$view = function (model) {
 				_elm_lang$svg$Svg$svg,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
-						_elm_lang$svg$Svg_Attributes$width('400px')
+						_elm_lang$svg$Svg_Attributes$viewBox(
+						_elm_lang$core$String$concat(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									A2(
+									_elm_lang$core$String$append,
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Basics$fst(model.xlims)),
+									' '),
+									A2(
+									_elm_lang$core$String$append,
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Basics$fst(model.ylims)),
+									' '),
+									A2(
+									_elm_lang$core$String$append,
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Basics$snd(model.xlims)),
+									' '),
+									A2(
+									_elm_lang$core$String$append,
+									_elm_lang$core$Basics$toString(
+										_elm_lang$core$Basics$snd(model.xlims)),
+									' ')
+								]))),
+						_elm_lang$svg$Svg_Attributes$width(
+						A2(
+							_elm_lang$core$String$append,
+							_elm_lang$core$Basics$toString(
+								_elm_lang$core$Basics$snd(model.xlims) - _elm_lang$core$Basics$fst(model.xlims)),
+							'px'))
 					]),
 				A2(
 					_elm_lang$core$List$map,
@@ -42,7 +71,59 @@ var _user$project$Views$view = function (model) {
 				_elm_lang$core$Native_List.fromArray(
 					[
 						_elm_lang$svg$Svg$text(
-						_elm_lang$core$Basics$toString(model))
+						A2(
+							_elm_lang$core$String$append,
+							'Score: ',
+							_elm_lang$core$Basics$toString(model.score)))
+					])),
+				A2(
+				_elm_lang$html$Html$footer,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$svg$Svg$text(
+						A2(
+							_elm_lang$core$String$append,
+							'Level: ',
+							_elm_lang$core$Basics$toString(model.level)))
+					]))
+			])) : A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$svg$Svg_Attributes$class('main')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$svg$Svg$svg,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
+						_elm_lang$svg$Svg_Attributes$width('400px')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$svg$Svg$text(
+						A2(
+							_elm_lang$core$String$append,
+							'Score: ',
+							_elm_lang$core$Basics$toString(model.score)))
+					])),
+				A2(
+				_elm_lang$html$Html$footer,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$svg$Svg$text('Click to begin')
 					]))
 			]));
 };
