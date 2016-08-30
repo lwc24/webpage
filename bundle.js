@@ -9041,14 +9041,23 @@
 	var _elm_lang$svg$Svg_Attributes$accelerate = _elm_lang$virtual_dom$VirtualDom$attribute('accelerate');
 	var _elm_lang$svg$Svg_Attributes$accentHeight = _elm_lang$virtual_dom$VirtualDom$attribute('accent-height');
 
-	var _user$project$Types$Pill = F6(
-		function (a, b, c, d, e, f) {
-			return {id: a, pos: b, vel: c, radius: d, color: e, time: f};
+	var _user$project$Types$Pill = F8(
+		function (a, b, c, d, e, f, g, h) {
+			return {id: a, pos: b, vel: c, radius: d, color: e, modTime: f, birthTime: g, aliveTime: h};
 		});
-	var _user$project$Types$Model = F5(
-		function (a, b, c, d, e) {
-			return {pills: a, elapsedTime: b, startTime: c, counter: d, ran: e};
+	var _user$project$Types$Model = F9(
+		function (a, b, c, d, e, f, g, h, i) {
+			return {bStarted: a, elapsedTime: b, startTime: c, counter: d, level: e, pills: f, score: g, xlims: h, ylims: i};
 		});
+	var _user$project$Types$StartClick = function (a) {
+		return {ctor: 'StartClick', _0: a};
+	};
+	var _user$project$Types$EndGame = function (a) {
+		return {ctor: 'EndGame', _0: a};
+	};
+	var _user$project$Types$StartGame = function (a) {
+		return {ctor: 'StartGame', _0: a};
+	};
 	var _user$project$Types$Collision = function (a) {
 		return {ctor: 'Collision', _0: a};
 	};
@@ -9072,7 +9081,7 @@
 	};
 
 	var _user$project$Views$view = function (model) {
-		return A2(
+		return _elm_lang$core$Native_Utils.eq(model.bStarted, true) ? A2(
 			_elm_lang$html$Html$div,
 			_elm_lang$core$Native_List.fromArray(
 				[
@@ -9084,8 +9093,37 @@
 					_elm_lang$svg$Svg$svg,
 					_elm_lang$core$Native_List.fromArray(
 						[
-							_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
-							_elm_lang$svg$Svg_Attributes$width('400px')
+							_elm_lang$svg$Svg_Attributes$viewBox(
+							_elm_lang$core$String$concat(
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$core$String$append,
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Basics$fst(model.xlims)),
+										' '),
+										A2(
+										_elm_lang$core$String$append,
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Basics$fst(model.ylims)),
+										' '),
+										A2(
+										_elm_lang$core$String$append,
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Basics$snd(model.xlims)),
+										' '),
+										A2(
+										_elm_lang$core$String$append,
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Basics$snd(model.xlims)),
+										' ')
+									]))),
+							_elm_lang$svg$Svg_Attributes$width(
+							A2(
+								_elm_lang$core$String$append,
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Basics$snd(model.xlims) - _elm_lang$core$Basics$fst(model.xlims)),
+								'px'))
 						]),
 					A2(
 						_elm_lang$core$List$map,
@@ -9115,63 +9153,163 @@
 					_elm_lang$core$Native_List.fromArray(
 						[
 							_elm_lang$svg$Svg$text(
-							_elm_lang$core$Basics$toString(model))
+							A2(
+								_elm_lang$core$String$append,
+								'Score: ',
+								_elm_lang$core$Basics$toString(model.score)))
+						])),
+					A2(
+					_elm_lang$html$Html$footer,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$svg$Svg$text(
+							A2(
+								_elm_lang$core$String$append,
+								'Level: ',
+								_elm_lang$core$Basics$toString(model.level)))
+						]))
+				])) : A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$svg$Svg_Attributes$class('main')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$svg$Svg$svg,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$svg$Svg_Attributes$viewBox('0 0 400 400'),
+							_elm_lang$svg$Svg_Attributes$width('400px')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$p,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$svg$Svg$text(
+							A2(
+								_elm_lang$core$String$append,
+								'Score: ',
+								_elm_lang$core$Basics$toString(model.score)))
+						])),
+					A2(
+					_elm_lang$html$Html$footer,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$svg$Svg$text('Click to begin')
 						]))
 				]));
 	};
 
 	var _user$project$State$subscriptions = function (model) {
-		return _elm_lang$core$Platform_Sub$batch(
+		return _elm_lang$core$Native_Utils.eq(model.bStarted, false) ? _elm_lang$core$Platform_Sub$batch(
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$mouse$Mouse$clicks(_user$project$Types$StartClick)
+				])) : _elm_lang$core$Platform_Sub$batch(
 			_elm_lang$core$Native_List.fromArray(
 				[
 					_elm_lang$mouse$Mouse$moves(_user$project$Types$PositMsg),
-					A2(_elm_lang$core$Time$every, 10 * _elm_lang$core$Time$millisecond, _user$project$Types$Tick),
-					A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Types$Counter)
+					A2(_elm_lang$core$Time$every, 20 * _elm_lang$core$Time$millisecond, _user$project$Types$Tick),
+					A2(_elm_lang$core$Time$every, 100 * _elm_lang$core$Time$millisecond, _user$project$Types$Counter)
 				]));
 	};
+	var _user$project$State$countGame = F2(
+		function (time, model) {
+			var newLevel = ((!_elm_lang$core$Native_Utils.eq(model.counter, 0)) && (_elm_lang$core$Native_Utils.eq(
+				A2(_elm_lang$core$Basics_ops['%'], model.counter, (20 * model.level) + 20),
+				0) && (_elm_lang$core$Native_Utils.cmp(model.level, 9) < 0))) ? (model.level + 1) : model.level;
+			var newCounter = (!_elm_lang$core$Native_Utils.eq(model.level, newLevel)) ? 0 : (model.counter + 1);
+			var command = ((!_elm_lang$core$Native_Utils.eq(model.counter, 0)) && _elm_lang$core$Native_Utils.eq(
+				A2(_elm_lang$core$Basics_ops['%'], model.counter, 10 - model.level),
+				0)) ? A2(
+				_elm_lang$core$Random$generate,
+				_user$project$Types$AddPill,
+				A2(
+					_elm_lang$core$Random$int,
+					_elm_lang$core$Basics$fst(model.xlims),
+					_elm_lang$core$Basics$snd(model.xlims))) : _elm_lang$core$Platform_Cmd$none;
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{counter: newCounter, level: newLevel}),
+				_1: command
+			};
+		});
 	var _user$project$State$relPos = F2(
 		function (_p1, _p0) {
 			var _p2 = _p1;
 			var _p3 = _p0;
 			return {ctor: '_Tuple2', _0: _p3._0 - _p2._0, _1: _p3._1 - _p2._1};
 		});
-	var _user$project$State$mousePill = F2(
-		function (pill, pos) {
+	var _user$project$State$movePlayer = F2(
+		function (position, model) {
+			var mousePos = A2(
+				_user$project$State$relPos,
+				{ctor: '_Tuple2', _0: 110, _1: 10},
+				position);
+			var movedPills = A2(
+				_elm_lang$core$List$map,
+				function (pill) {
+					return _elm_lang$core$Native_Utils.eq(pill.id, 0) ? _elm_lang$core$Native_Utils.update(
+						pill,
+						{pos: mousePos}) : pill;
+				},
+				model.pills);
 			return _elm_lang$core$Native_Utils.update(
-				pill,
-				{pos: pos});
+				model,
+				{pills: movedPills});
 		});
-	var _user$project$State$getStartTime = A3(_elm_lang$core$Task$perform, _user$project$Types$NoOp, _user$project$Types$StartTick, _elm_lang$core$Time$now);
 	var _user$project$State$initialPill = {
 		id: 0,
 		pos: {ctor: '_Tuple2', _0: 0, _1: 0},
 		vel: {ctor: '_Tuple2', _0: 0, _1: 50},
 		radius: 15,
 		color: 'red',
-		time: 0.0
+		modTime: 0.0,
+		aliveTime: 0.0,
+		birthTime: 0.0
 	};
 	var _user$project$State$initialModel = {
+		bStarted: false,
+		elapsedTime: 0.0,
+		startTime: 0.0,
+		counter: 0,
+		level: 1,
+		score: 0,
+		xlims: {ctor: '_Tuple2', _0: 0, _1: 400},
+		ylims: {ctor: '_Tuple2', _0: 0, _1: 400},
 		pills: _elm_lang$core$Native_List.fromArray(
 			[
 				_elm_lang$core$Native_Utils.update(
 				_user$project$State$initialPill,
 				{id: 0, color: 'blue'})
-			]),
-		elapsedTime: 0.0,
-		startTime: 0.0,
-		counter: 0,
-		ran: 0
+			])
 	};
-	var _user$project$State$init = {ctor: '_Tuple2', _0: _user$project$State$initialModel, _1: _user$project$State$getStartTime};
+	var _user$project$State$init = {
+		ctor: '_Tuple2',
+		_0: _user$project$State$initialModel,
+		_1: A3(_elm_lang$core$Task$perform, _user$project$Types$NoOp, _user$project$Types$StartTick, _elm_lang$core$Time$now)
+	};
 	var _user$project$State$vecMult = F2(
-		function (scale, _p4) {
+		function (scalar, _p4) {
 			var _p5 = _p4;
 			return {
 				ctor: '_Tuple2',
 				_0: _elm_lang$core$Basics$round(
-					scale * _elm_lang$core$Basics$toFloat(_p5._0)),
+					scalar * _elm_lang$core$Basics$toFloat(_p5._0)),
 				_1: _elm_lang$core$Basics$round(
-					scale * _elm_lang$core$Basics$toFloat(_p5._1))
+					scalar * _elm_lang$core$Basics$toFloat(_p5._1))
 			};
 		});
 	var _user$project$State$vecDist = F2(
@@ -9184,36 +9322,6 @@
 			var x1 = _elm_lang$core$Basics$toFloat(_p8._0);
 			return _elm_lang$core$Basics$sqrt(((x1 - x2) * (x1 - x2)) + ((y1 - y2) * (y1 - y2)));
 		});
-	var _user$project$State$movePlayer = F2(
-		function (position, model) {
-			var playerPos = A2(
-				_user$project$State$relPos,
-				{ctor: '_Tuple2', _0: 110, _1: 10},
-				position);
-			var movedPills = A2(
-				_elm_lang$core$List$map,
-				function (pill) {
-					return _elm_lang$core$Native_Utils.eq(pill.id, 0) ? A2(
-						_user$project$State$mousePill,
-						pill,
-						A2(
-							_user$project$State$relPos,
-							{ctor: '_Tuple2', _0: 110, _1: 10},
-							position)) : pill;
-				},
-				model.pills);
-			var collPills = A2(
-				_elm_lang$core$List$filter,
-				function (pill) {
-					return ((!_elm_lang$core$Native_Utils.eq(pill.id, 0)) && (_elm_lang$core$Native_Utils.cmp(
-						A2(_user$project$State$vecDist, pill.pos, playerPos),
-						_elm_lang$core$Basics$toFloat(pill.radius) * 2) < 0)) ? false : true;
-				},
-				movedPills);
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{pills: collPills});
-		});
 	var _user$project$State$vecAdd = F2(
 		function (_p11, _p10) {
 			var _p12 = _p11;
@@ -9225,19 +9333,36 @@
 			var newPos = A2(
 				_user$project$State$vecAdd,
 				pill.pos,
-				A2(_user$project$State$vecMult, tstep * (pill.time * 0.3), pill.vel));
+				A2(
+					_user$project$State$vecMult,
+					tstep,
+					A2(_user$project$State$vecMult, 5.5 - (1.0 * pill.aliveTime), pill.vel)));
 			return (!_elm_lang$core$Native_Utils.eq(newPos, pill.pos)) ? _elm_lang$core$Native_Utils.update(
 				pill,
-				{pos: newPos, time: pill.time + tstep}) : pill;
+				{pos: newPos, modTime: pill.modTime + tstep, aliveTime: (pill.modTime + tstep) - pill.birthTime}) : pill;
 		});
-	var _user$project$State$movePills = F2(
+	var _user$project$State$stepGame = F2(
 		function (time, model) {
+			var player = A2(
+				_elm_lang$core$Maybe$withDefault,
+				_user$project$State$initialPill,
+				_elm_lang$core$List$head(model.pills));
+			var playPos = player.pos;
+			var collPills = A2(
+				_elm_lang$core$List$filter,
+				function (pill) {
+					return ((!_elm_lang$core$Native_Utils.eq(pill.id, 0)) && (_elm_lang$core$Native_Utils.cmp(
+						A2(_user$project$State$vecDist, pill.pos, playPos),
+						_elm_lang$core$Basics$toFloat(pill.radius) * 2) < 0)) ? false : true;
+				},
+				model.pills);
+			var newScore = (!_elm_lang$core$Native_Utils.eq(collPills, model.pills)) ? (model.score + 1) : model.score;
 			var movedPills = A2(
 				_elm_lang$core$List$map,
 				function (pill) {
-					return (!_elm_lang$core$Native_Utils.eq(pill.id, 0)) ? A2(_user$project$State$stepPill, model.elapsedTime - pill.time, pill) : pill;
+					return (!_elm_lang$core$Native_Utils.eq(pill.id, 0)) ? A2(_user$project$State$stepPill, model.elapsedTime - pill.modTime, pill) : pill;
 				},
-				model.pills);
+				collPills);
 			var filteredPills = A2(
 				_elm_lang$core$List$filter,
 				function (pill) {
@@ -9246,17 +9371,45 @@
 						420) > 0) && (!_elm_lang$core$Native_Utils.eq(pill.id, 0))) ? false : true;
 				},
 				movedPills);
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{
-					pills: filteredPills,
-					elapsedTime: _elm_lang$core$Time$inSeconds(time) - model.startTime
-				});
+			var command = (!_elm_lang$core$Native_Utils.eq(filteredPills, movedPills)) ? A3(
+				_elm_lang$core$Task$perform,
+				_user$project$Types$NoOp,
+				_user$project$Types$EndGame,
+				_elm_lang$core$Task$succeed('Game Ended')) : _elm_lang$core$Platform_Cmd$none;
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						pills: filteredPills,
+						elapsedTime: _elm_lang$core$Time$inSeconds(time) - model.startTime,
+						score: newScore
+					}),
+				_1: command
+			};
 		});
 	var _user$project$State$update = F2(
 		function (msg, model) {
 			var _p14 = msg;
 			switch (_p14.ctor) {
+				case 'StartTick':
+					return {ctor: '_Tuple2', _0: _user$project$State$initialModel, _1: _elm_lang$core$Platform_Cmd$none};
+				case 'StartClick':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							_user$project$State$initialModel,
+							{bStarted: true, score: 0}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'EndGame':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							_user$project$State$initialModel,
+							{score: model.score}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
 				case 'PositMsg':
 					var _p15 = _p14._0;
 					return {
@@ -9268,34 +9421,10 @@
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				case 'Tick':
-					return {
-						ctor: '_Tuple2',
-						_0: A2(_user$project$State$movePills, _p14._0, model),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-				case 'StartTick':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{
-								startTime: _elm_lang$core$Time$inSeconds(_p14._0)
-							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+					return A2(_user$project$State$stepGame, _p14._0, model);
 				case 'Counter':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{counter: model.counter + 1}),
-						_1: A2(
-							_elm_lang$core$Random$generate,
-							_user$project$Types$AddPill,
-							A2(_elm_lang$core$Random$int, 0, 400))
-					};
+					return A2(_user$project$State$countGame, _p14._0, model);
 				case 'AddPill':
-					var _p16 = _p14._0;
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
@@ -9311,12 +9440,12 @@
 												_user$project$State$initialPill,
 												{
 													id: _elm_lang$core$List$length(pills),
-													time: model.elapsedTime,
-													pos: {ctor: '_Tuple2', _0: _p16, _1: 0}
+													birthTime: model.elapsedTime,
+													modTime: model.elapsedTime,
+													pos: {ctor: '_Tuple2', _0: _p14._0, _1: 0}
 												})
 											]));
-								}(model.pills),
-								ran: _p16
+								}(model.pills)
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
